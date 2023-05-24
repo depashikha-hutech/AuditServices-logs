@@ -45,7 +45,6 @@ async function getevents(OrgId,startdate=null,enddate=null,type=null,offset,limi
     return {
         sucess:true,
         statusCode: 200,
-        message:"meeting created sucessfully",
         totalCount:event5?.count,
          logs: event5?.rows,
         };    
