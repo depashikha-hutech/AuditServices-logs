@@ -5,9 +5,9 @@ require("dotenv").config();
 const env = process?.env
 
 // create events
- async function Createevent(name,type,details,loggedBy, role,date,Contextid,OrgId,tenantId) {
+ async function Createevent(user,type,details,event,IPAddress,url,role,Contextid,OrgId,tenantId) {
      try{
- const payload = {name,type,details,loggedBy, role,date,Contextid,OrgId,tenantId};
+ const payload = {user,type,details,event,IPAddress,url,role,Contextid,OrgId,tenantId};
   const eventinfo = await db.AduitService.create(payload)
  return (eventinfo)
       } catch (error){
@@ -25,15 +25,16 @@ const env = process?.env
 
 //GET all logs in org id from start to end date
 
-async function getevents(OrgId,startdate=null,enddate=null,type=null,offset,limit) {      
+async function getevents(OrgId,startdate=null,enddate=null,type=null,offset,limit) { 
+  
   try {
     let where ={OrgId }
-    if (type)
+     if (type)
     where={
       ...where,type
     }
     if (startdate && enddate){
-     where={ ...where,date: {
+     where={ ...where,createdAt: {
           [Op.between]: [new Date(startdate), new Date(enddate)],
          }
         }
@@ -57,7 +58,7 @@ async function getevents(OrgId,startdate=null,enddate=null,type=null,offset,limi
 
 
       
-    // contextId  
+    //contextId  
     async function geterrorevents(OrgId,Contextid,startdate,enddate) {
       try {
         const error = await db.AduitService.findAndCountAll({
@@ -73,7 +74,7 @@ async function getevents(OrgId,startdate=null,enddate=null,type=null,offset,limi
         return {
             sucess:true,
             statusCode: 200,
-            message:"meeting created sucessfully",
+            message:"event created sucessfully",
             totalCount:error?.count,
              evnt2: error?.rows,
             };    

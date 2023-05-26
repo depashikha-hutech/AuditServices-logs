@@ -7,9 +7,9 @@ route.post("/", async(req, res) => {
     try {
         const OrgId = req.headers.orgid;
         const tenantId = req.headers.tenantid;
-        const {name,type,details,loggedBy, role,date,Contextid} = req?.body;
-        const createevent = await Createevent(name,type,details,loggedBy, role,date,Contextid,OrgId,tenantId);
-        if(name && type && details &&  loggedBy &&  role && date&& Contextid){
+        const {user,type,details,event,IPAddress,url,role,Contextid} = req?.body;
+        const createevent = await Createevent(user,type,details,event,IPAddress,url,role,Contextid,OrgId,tenantId);
+        if(user && type && details && event && IPAddress && url && role  && Contextid){
         res.status(200).json(createevent);
         }else{
   res.status(400).json({error: "bad request"})
@@ -28,11 +28,12 @@ route.get("/:OrgId", async (req, res)=> {
         const orgId=req?.params?.OrgId
         const eventdetails = await  getevents(orgId,startdate,enddate,ty,offset,limit);
         res.status(eventdetails?.statusCode).json(eventdetails);
+        console.log("666666",eventdetails);
     }catch (error) {
         res.status(500).json({ sucess: false, message: "internal server error", error: error.message});
     }
 });
-// contextid
+//contextid
 route.get("/error/:OrgId/:Contextid", async (req, res)=> {
     try {
         const { OrgId, Contextid } = req?.params;

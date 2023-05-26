@@ -18,6 +18,7 @@ db.sequelize
       `db connected to  ${ process?.env?.SERVERHOST || "NA" } database "${process?.env?.DBNAME || "NA"}"`
       )
       db.sequelize.sync({ alert:true});
+     //db.sequelize.sync({ force:true});
     })
   .catch((err) => {
     console.error(
