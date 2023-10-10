@@ -1,26 +1,28 @@
 const sequelize = require("sequelize");
-const {DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
-module.exports = (sequelize, Sequelize)=> {
-    const AduitService = sequelize.define(
-        "Audit",
-        {
-            Contextid: {
-                type :DataTypes.TEXT,
-                allowNull: true
-            },
-            event:{type:DataTypes.TEXT,allowNull: false},
-            type:{type:DataTypes.TEXT,allowNull: false},
-            details:{type:DataTypes.TEXT,allowNull: false},
-            OrgId:{type :DataTypes.UUID,allowNull: true},
-            tenantId:{type :DataTypes.UUID,allowNull: true},
-            user:{type:DataTypes.TEXT,allowNull: false},
-            role:{type:DataTypes.TEXT,allowNull: false},
-            Contextid: { type :DataTypes.TEXT, allowNull: false},
-            url: { type :DataTypes.TEXT, allowNull: false},
-            IPAddress:{type :DataTypes.TEXT,allowNull: true}
-        },
-        { tabelName :"aduitservice"}
-    );
-    return AduitService;
-}
+module.exports = (sequelize, Sequelize) => {
+  const AuditService = sequelize.define(
+    "Audit",
+    {
+      id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+      },
+      OrgId: { type: DataTypes.UUID, allowNull: true },
+      tenantId: { type: DataTypes.UUID, allowNull: true },
+      IPAddress: { type: DataTypes.STRING, allowNull: true },
+      user: { type: DataTypes.JSONB, allowNull: true },
+      role: { type: DataTypes.JSONB, allowNull: true },
+      Contextid: { type: DataTypes.STRING, allowNull: true },
+      event: { type: DataTypes.JSONB, allowNull: true },
+      type: { type: DataTypes.STRING, allowNull: true },
+      url: { type: DataTypes.STRING, allowNull: true },
+      body: { type: DataTypes.JSONB, allowNull: true },
+      details: { type: DataTypes.JSONB, allowNull: true },
+    },
+    { tableName: "audit" }
+  );
+  return AuditService;
+};
