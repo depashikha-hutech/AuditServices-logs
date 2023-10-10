@@ -148,7 +148,7 @@ async function geteventsbyTenants(
     };
   }
 }
-//contextId
+//contextId...
 async function errorEvents(Contextid, startdate, enddate) {
   try {
     let whereClause = {

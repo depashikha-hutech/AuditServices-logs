@@ -8,7 +8,7 @@ const tenantroute = require("./controller/service");
 require("dotenv").config();
 const cors = require("cors");
 
-const port = process?.env?.port || 7006;
+const port = process?.env?.port || 7000;
 app.use(cors());
 app.use(bodyParser.json());
 

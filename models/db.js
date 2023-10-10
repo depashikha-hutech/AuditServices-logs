@@ -13,7 +13,7 @@ const sequelize = new Sequelize(env.DBNAME, env.DBUSERNAME, env.DBPASSWORD, {
     },
   },
   pool: {
-    max: 10,
+    max: 5,
     min: 0,
   },
 });

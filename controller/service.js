@@ -104,7 +104,7 @@ route.get("/tenants/:tenantId/events", async (req, res) => {
   }
 });
 
-//contextid
+//contextid..
 route.get("/:Contextid", async (req, res) => {
   try {
     const { startdate, enddate, Contextid } = req?.query;
